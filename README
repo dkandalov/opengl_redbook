@@ -1,0 +1,5 @@
+This is a project with examples from OpenGL 'The Red Book' (http://fly.cc.fer.hr/~unreal/theredbook/)
+
+Examples are not exact copies and they are also modified to use GLUT instead of "aux.h".
+I only tried this examples in OSX although they should work on other platforms too.
+Examples depend on OpenGL and GLUT frameworks.
