@@ -11,22 +11,23 @@ void display(void) {
 
     glBegin(GL_LINES);
         glColor3f(1.0, 0.0, 0.0);
-        glNormal3f(1,1,1);
+        glNormal3f(10,10,10); // normal vector towards light
+        // z axis
         glVertex3f(0, 0, 0);
-        glVertex3f(0, 0, 2);
+        glVertex3f(0, 0, 4);
+        // y axis
         glVertex3f(0, 0, 0);
         glVertex3f(0, 2, 0);
+        // x axis
         glVertex3f(0, 0, 0);
         glVertex3f(2, 0, 0);
     glEnd();
 
     glPushMatrix();
-
         glRotatef(spin, 1,1,0);
         glTranslatef(0.5, 0.5 ,-1);
         glutSolidSphere(0.5, 200, 200);
 //        glRectf(-1.0, -1.0, 1.0, 1.0);
-
     glPopMatrix();
 
     glFlush();
@@ -34,11 +35,12 @@ void display(void) {
 }
 
 void init() {
-//    return;
+    // adding lights
+
     GLfloat mat_specular[] = { 1.0, 1.0, 1.0, 1.0 };
     GLfloat mat_shininess[] = { 50.0 };
-    GLfloat light_position[] = { 1.0, 1.0, 1.0, 0.0 };
-    GLfloat light_ambient[] = { 0.0, 0.0, 1.0, 1.0};
+    GLfloat light_position[] = { 10.0, 10.0, 10.0, 0.0 };
+    GLfloat light_ambient[] = { 0.0, 0.0, 1.0, 1.0 };
 
     glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
     glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
@@ -69,15 +71,18 @@ void init() {
 }
 
 void myReshape(int w, int h) {
+    printf("reshaping..\n");
+
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glRotatef(-25, 1,1,0);
 
     if (w <= h)
         glOrtho (-1.5, 1.5, -1.5*(GLfloat)h/(GLfloat)w, 1.5*(GLfloat)h/(GLfloat)w, -10.0, 10.0);
     else
         glOrtho (-1.5*(GLfloat)w/(GLfloat)h, 1.5*(GLfloat)w/(GLfloat)h, -1.5, 1.5, -10.0, 10.0);
+
+    glRotatef(30, 1,1,0); // slightly rotate to see all axis
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
